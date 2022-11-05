@@ -16,7 +16,7 @@
 
   <br/>
 
-  <div class="schedule">
+  <div class="schedule"  *ngIf="productList.length > 0">
     <span>Próxima data de compra: </span><input type="date" placeholder="DD/MM">
   </div>
 
@@ -26,8 +26,8 @@
     <input class="add" type="text" placeholder="Buscar novo produto" [(ngModel)]="productToSearch" (input)="onSearchChange()"/>
     <div class="autocomplete" [ngStyle]="{'display': productToSearch.length > 2 ? 'block' : 'none'}">
       <ul *ngIf="searchList.length > 0">
-        <li>
-          <div *ngFor="let product of searchList">
+        <li *ngFor="let product of searchList">
+          <div (click)="addProduct(product)">
             <i class="fa-solid fa-box"></i>
             <div class="product-desc">
               <p>{{product.name}}</p>
@@ -35,7 +35,7 @@
             </div>
             <div class="product-price">
               <span>Preço médio:</span>
-              <span class="price">R$99,99</span>
+              <span class="price">R${{product.price | number : '1.2-2'}}</span>
             </div>
           </div>
         </li>
@@ -47,65 +47,39 @@
     </div>
   </div>
 
+  <div *ngIf="productList.length == 0" class="empty-basket">
+    <h2>Sua cesta está vazia!</h2>
+    <br/>
+    <i class="fa-solid fa-basket-shopping fa-4x"></i>
+  </div>
 
-  <ul class="product-list">
-    <li>
+  <ul *ngIf="productList.length > 0" class="product-list">
+    <li *ngFor="let p of productList">
       <div>
         <i class="fa-solid fa-box"></i>
         <div class="product-desc">
-          <p>Produto X</p>
-          <!--<span>Categoria</span>&nbsp;<span>Marca</span><br/>-->
-          <span>Duração Estm.</span>&nbsp;<span>20d</span>
+          <p>{{p.product.name}}</p>
+          <span>Duração Estm.</span>&nbsp;<span>{{p.product.avgDuration * p.amount}}d</span>
         </div>
         <div class="product-amount">
-          <i class="fa-solid fa-circle-plus"></i>
+          <i class="fa-solid fa-circle-minus" (click)="decreaseAmount(p)"></i>
           <span class="amount">
-            1
+            {{p.amount}}
           </span>
-          <i class="fa-solid fa-circle-minus"></i>
-        </div>
-      </div>
-
-      <div>
-        <i class="fa-solid fa-box"></i>
-        <div class="product-desc">
-          <p>Produto Y</p>
-          <!--<span>Categoria</span>&nbsp;<span>Marca</span><br/>-->
-          <span>Duração Estm.</span>&nbsp;<span>21d</span>
-        </div>
-        <div class="product-amount">
-          <i class="fa-solid fa-circle-plus"></i>
-          <span class="amount">
-            1
-          </span>
-          <i class="fa-solid fa-circle-minus"></i>
-        </div>
-      </div>
-
-      <div>
-        <i class="fa-solid fa-box"></i>
-        <div class="product-desc">
-          <p>Produto Z</p>
-          <!--<span>Categoria</span>&nbsp;<span>Marca</span><br/>-->
-          <span>Duração Estm.</span>&nbsp;<span>19d</span>
-        </div>
-        <div class="product-amount">
-          <i class="fa-solid fa-circle-plus"></i>
-          <span class="amount">
-            1
-          </span>
-          <i class="fa-solid fa-circle-minus"></i>
+          <i class="fa-solid fa-circle-plus" (click)="increaseAmount(p)"></i>
         </div>
       </div>
     </li>
   </ul>
-  <hr/>
-  <div class="footer">
+  <hr *ngIf="productList.length > 0"/>
+  <div class="footer"  *ngIf="productList.length > 0">
     <h3>*Total Aproximado:</h3>
     <div class="price">
-      <h2>R$99,00</h2>
+      <h2>R${{getTotal() | number : '1.2-2'}}</h2>
     </div>
   </div>
+
+  <button class="buy-now" *ngIf="productList.length > 0">Comprar Agora</button>
 
 
 </section>

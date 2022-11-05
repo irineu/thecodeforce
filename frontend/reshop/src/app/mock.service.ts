@@ -14,14 +14,16 @@ export class MockService {
       brand: 'Kitchen',
       type: 'Papel Toalha',
       units: 2,
-      avgUnitDuration: 5
+      avgDuration: 5,
+      price: 7.90
     },
     {
       name: 'Papel Toalha',
       brand: 'Qualitá',
       type: 'Papel Toalha',
       units: 3,
-      avgUnitDuration: 5
+      avgDuration: 5,
+      price: 10.20
     },
 
     //Café
@@ -30,21 +32,24 @@ export class MockService {
       brand: 'Três Corações',
       type: 'Café',
       units: 1,
-      avgUnitDuration: 15
+      avgDuration: 15,
+      price: 11.50
     },
     {
       name: 'Café Extra Forte',
       brand: 'Três Corações',
       type: 'Café',
       units: 1,
-      avgUnitDuration: 15
+      avgDuration: 15,
+      price: 12.40
     },
     {
       name: 'Café Tradicional',
       brand: 'Três Pelé',
       type: 'Café',
       units: 1,
-      avgUnitDuration: 15
+      avgDuration: 15,
+      price: 10.76
     },
 
     //Desinfetante
@@ -53,14 +58,16 @@ export class MockService {
       brand: 'Pinho',
       type: 'Desinfetante',
       units: 1,
-      avgUnitDuration: 5
+      avgDuration: 5,
+      price: 14.50
     },
     {
       name: 'Desinfetante Lavanda 2l',
       brand: 'Pinho',
       type: 'Desinfetante',
       units: 1,
-      avgUnitDuration: 10
+      avgDuration: 10,
+      price: 19.80
     }
   ]
 

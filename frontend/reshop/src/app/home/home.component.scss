@@ -86,6 +86,14 @@
     }
   }
 
+  div.empty-basket{
+    color: #AAA;
+    text-align: center;
+    border: 5px dashed #EEE;
+    padding: 1rem;
+    border-radius: 15px;
+  }
+
   ul{
     list-style: none;
 
@@ -156,5 +164,16 @@
     div.price{
       text-align: right;
     }
+  }
+
+  button.buy-now{
+    margin-top: 25px;
+    background: #9E3667;
+    padding: .65rem;
+    color: #FFF;
+    border: 0;
+    border-radius: 4px;
+    width: 100%;
+
   }
 }
