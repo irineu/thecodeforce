@@ -31,14 +31,59 @@
     }
   }
 
-  input.add{
-    width: 100%;
-    padding: .5rem;
-    box-sizing: border-box;
-    font-size: .8rem;
-    border: 1px solid #990000;
-    border-radius: 5px;
-    margin-bottom: 1.5rem;
+  .schedule{
+
+    span{
+      font-weight: bold;
+      color: #333;
+      font-size: .8rem;
+    }
+
+    input{
+      width: 100%;
+      box-sizing: border-box;
+      font-size: .8rem;
+      border: 1px solid #990000;
+      border-radius: 5px;
+      margin: 5px 0;
+      padding: .5rem;
+      display: block;
+    }
+  }
+
+  .autocomplete-container{
+
+    position: relative;
+
+    input.add{
+      width: 100%;
+      padding: .5rem;
+      box-sizing: border-box;
+      font-size: .8rem;
+      border: 1px solid #990000;
+      border-radius: 5px;
+      margin-bottom: 1.5rem;
+    }
+
+    div.empty{
+      padding: .5rem;
+      font-size: .8rem;
+      text-align: center;
+      color: #888888;
+    }
+
+    div.autocomplete{
+
+      position: absolute;
+      width: 100%;
+      top:2.2rem;
+      display: none;
+      background: #FFF;
+      border: 1px solid #777;
+      border-radius: 5px;
+      padding: .5rem;
+      box-sizing: border-box;
+    }
   }
 
   ul{
@@ -54,6 +99,22 @@
         i {
           color: #999;
           font-size: 1.7em;
+        }
+
+        div.product-price {
+
+          text-align: right;
+
+          span{
+            font-size: .6rem;
+            display: block;
+            color: #888;
+          }
+
+          span.price{
+            font-size: .8rem;
+            color: #333;
+          }
         }
 
         div.product-desc {
@@ -83,10 +144,17 @@
             padding: 0px 10px;
           }
         }
-
-
       }
+    }
+  }
 
+  .footer{
+    margin-top: .5rem;
+    display: grid;
+    grid-template-columns: auto 2fr;
+
+    div.price{
+      text-align: right;
     }
   }
 }

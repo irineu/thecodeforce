@@ -93,4 +93,10 @@ export class MockService {
 
     return this.activeUser;
   }
+
+  search(productToSearch: string) {
+    return this.products.filter(p => {
+      return p.name.toLowerCase().indexOf(productToSearch.toLowerCase()) > -1 || p.type.toLowerCase().indexOf(productToSearch.toLowerCase()) > -1
+    });
+  }
 }

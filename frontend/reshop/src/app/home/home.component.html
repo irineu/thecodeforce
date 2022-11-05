@@ -16,7 +16,37 @@
 
   <br/>
 
-  <input class="add" type="text" placeholder="Buscar novo produto" />
+  <div class="schedule">
+    <span>Próxima data de compra: </span><input type="date" placeholder="DD/MM">
+  </div>
+
+  <br/>
+
+  <div class="autocomplete-container">
+    <input class="add" type="text" placeholder="Buscar novo produto" [(ngModel)]="productToSearch" (input)="onSearchChange()"/>
+    <div class="autocomplete" [ngStyle]="{'display': productToSearch.length > 2 ? 'block' : 'none'}">
+      <ul *ngIf="searchList.length > 0">
+        <li>
+          <div *ngFor="let product of searchList">
+            <i class="fa-solid fa-box"></i>
+            <div class="product-desc">
+              <p>{{product.name}}</p>
+              <span>{{product.type}}</span>&nbsp;<span>{{product.brand}}</span><br/>
+            </div>
+            <div class="product-price">
+              <span>Preço médio:</span>
+              <span class="price">R$99,99</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="empty" *ngIf="searchList.length == 0">
+        Pruduto não encontrado em nossos parceiros
+      </div>
+    </div>
+  </div>
+
 
   <ul class="product-list">
     <li>
@@ -69,4 +99,13 @@
       </div>
     </li>
   </ul>
+  <hr/>
+  <div class="footer">
+    <h3>*Total Aproximado:</h3>
+    <div class="price">
+      <h2>R$99,00</h2>
+    </div>
+  </div>
+
+
 </section>
