@@ -1,1 +1,43 @@
-<p>login works!</p>
+<section>
+  <div>
+
+    <div class="logo">
+      <img src="assets/images/logo.svg" />
+    </div>
+
+    <div class="sso">
+      <p>Selecione o meio acesso:</p>
+      <div class="sso-button linkedin" (click)="loginWithSSO('linkedin')">
+        <div class="icon">
+          <i class="fa-brands fa-linkedin"></i>
+        </div>
+        <div class="label prevent-select">Entrar com o Linkedin</div>
+      </div>
+      <br/>
+      <div class="sso-button facebook" (click)="loginWithSSO('facebook')">
+        <span class="icon">
+          <i class="fa-brands fa-square-facebook"></i>
+        </span>
+        <span class="label prevent-select">Entrar com o Facebook</span>
+      </div>
+      <br/>
+
+      <div class="sso-button google" (click)="loginWithSSO('google')">
+        <span class="icon">
+          <i class="fa-brands fa-google"></i>
+        </span>
+        <span class="label prevent-select">Entrar com o Google</span>
+      </div>
+      <br/>
+      <div class="sso-button apple" (click)="loginWithSSO('apple')">
+        <span class="icon">
+          <i class="fa-brands fa-apple"></i>
+        </span>
+        <span class="label prevent-select">Entrar com o iCloud</span>
+      </div>
+
+
+    </div>
+
+  </div>
+</section>

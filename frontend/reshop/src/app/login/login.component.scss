@@ -1,0 +1,74 @@
+:host{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+
+  > section{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >div{
+      text-align: center;
+    }
+
+    p{
+      margin-bottom: 1rem;
+      color: #FFF;
+    }
+  }
+
+  div.logo{
+    img{
+      width: 75vw;
+    }
+  }
+
+  div.sso{
+    padding: 2rem;
+  }
+
+  .sso-button{
+    cursor: pointer;
+    border: 1px solid #000;
+    width: 100%;
+    background: #FFF;
+    padding: .5em;
+    color: #222;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 2em auto;
+    box-sizing: border-box;
+
+    box-shadow: 0px 0px 5px #00000088;
+
+    &.facebook{
+      background: #3b559c;
+      color: #FFF;
+    }
+
+    &.linkedin{
+      background: #1b7fb4;
+      color: #FFF;
+    }
+
+    &.apple{
+      background: #000;
+      color: #FFF;
+    }
+
+    .icon{
+      padding-right: .5em;
+      text-align: center;
+    }
+
+    .label{
+      font-weight: bold;
+      text-align: left;
+    }
+
+  }
+}
