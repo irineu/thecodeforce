@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MockService} from "../mock.service";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private mockService:MockService) { }
+
+  activeUser: any;
 
   ngOnInit(): void {
+    this.activeUser = this.mockService.getActiveUser();
   }
 
 }

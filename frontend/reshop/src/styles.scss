@@ -19,3 +19,15 @@ body{
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
+
+h4{
+  color: #888;
+  font-size: .8rem;
+}
+
+h1{
+  color: #333;
+  font-size: 1.5rem;
+}
+
+textarea, select, input, button { outline: none; }
