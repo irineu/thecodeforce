@@ -18,6 +18,5 @@ const db = client.db("codeforce");
 const clients = db.collection("clients");
 
 module.exports = {
-  db,
   clients
 }
