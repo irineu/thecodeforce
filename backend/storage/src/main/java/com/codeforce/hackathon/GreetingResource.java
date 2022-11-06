@@ -17,10 +17,8 @@ import org.jboss.logging.Logger;
 
 import com.codeforce.hackathon.model.Storage;
 import com.codeforce.hackathon.model.UpdateDTO;
-
 import com.codeforce.hackathon.model.Request;
 import com.codeforce.hackathon.model.Response;
-import com.codeforce.hackathon.model.Storage;
 
 @Path("/storage")
 public class GreetingResource {
