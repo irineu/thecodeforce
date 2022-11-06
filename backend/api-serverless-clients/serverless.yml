@@ -1,6 +1,6 @@
 org: fmolliet
-app: aws-node-express-api
-service: aws-node-express-api
+app: api-serverless-clients
+service: api-serverless-clients
 frameworkVersion: '3'
 
 provider:
