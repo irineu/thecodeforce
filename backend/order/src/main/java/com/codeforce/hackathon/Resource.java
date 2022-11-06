@@ -20,12 +20,12 @@ import com.codeforce.hackathon.model.UpdateDTO;
 import com.codeforce.hackathon.model.Order;
 import com.codeforce.hackathon.model.Product;
 import com.codeforce.hackathon.model.Request;
-import com.codeforce.hackathon.model.Response;
+import com.codeforce.hackathon.model.ResponseDTO;
 
 @Path("/order")
-public class GreetingResource {
+public class Resource {
     
-    private static final Logger log = Logger.getLogger(GreetingResource.class);
+    private static final Logger log = Logger.getLogger(Resource.class);
     
 
     @GET
@@ -43,7 +43,7 @@ public class GreetingResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(  Request request ){
+    public ResponseDTO create(  Request request ){
         log.info(request);
         
         Order order = new Order();
@@ -62,12 +62,12 @@ public class GreetingResource {
 
         order.persist();
         
-        return new Response();
+        return new ResponseDTO();
     }
     
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(  UpdateDTO request ){
+    public ResponseDTO update(  UpdateDTO request ){
         log.info(request);
         
         Order order = new Order();
@@ -87,17 +87,17 @@ public class GreetingResource {
         order.id = new ObjectId(request.getId());
         order.update();
         
-        return new Response("Atualizado com sucesso!");
+        return new ResponseDTO("Atualizado com sucesso!");
     }
     
     @DELETE
     @Path("/{id}")
-    public Response delete(  @PathParam("id") String id ){
+    public ResponseDTO delete(  @PathParam("id") String id ){
         log.info(id);
         
         Order.deleteById(new ObjectId(id));
         
-        return new Response("Deletado com sucesso");
+        return new ResponseDTO("Deletado com sucesso");
     }
     
 }

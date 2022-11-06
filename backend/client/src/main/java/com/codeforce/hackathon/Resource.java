@@ -4,7 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,7 +20,7 @@ import org.bson.types.ObjectId;
 import org.jboss.logging.Logger;
 
 import com.codeforce.hackathon.model.Client;
-import com.codeforce.hackathon.model.CreateResponseDTO;
+import com.codeforce.hackathon.model.ResponseDTO;
 import com.codeforce.hackathon.model.UpdateDTO;
 
 import io.quarkus.security.ForbiddenException;
@@ -74,7 +73,7 @@ public class Resource {
     
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
-    public CreateResponseDTO update(  UpdateDTO request ){
+    public ResponseDTO update(  UpdateDTO request ){
         log.info(request);
         
         if ( Client.findByDocumentNumber(request.getDocumentNumber()) == null) {
@@ -92,17 +91,17 @@ public class Resource {
         client.id = new ObjectId(request.getId());
         client.update();
         
-        return new CreateResponseDTO("Atualizado com sucesso!");
+        return new ResponseDTO("Atualizado com sucesso!");
     }
     
     @DELETE
     @Path("/{id}")
-    public CreateResponseDTO delete(  @PathParam("id") String id ){
+    public ResponseDTO delete(  @PathParam("id") String id ){
         log.info(id);
         
         Client.deleteById(new ObjectId(id));
         
-        return new CreateResponseDTO("Deletado com sucesso");
+        return new ResponseDTO("Deletado com sucesso");
     }
     
 }
