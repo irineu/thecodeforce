@@ -1,17 +1,22 @@
 package com.codeforce.hackathon;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.bson.types.ObjectId;
 import org.jboss.logging.Logger;
@@ -19,6 +24,7 @@ import org.jboss.logging.Logger;
 import com.codeforce.hackathon.model.UpdateDTO;
 import com.codeforce.hackathon.model.Order;
 import com.codeforce.hackathon.model.Product;
+import com.codeforce.hackathon.model.Products;
 import com.codeforce.hackathon.model.Request;
 import com.codeforce.hackathon.model.ResponseDTO;
 
@@ -43,26 +49,27 @@ public class Resource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseDTO create(  Request request ){
+    public Response create(  Request request ) throws URISyntaxException{
         log.info(request);
         
         Order order = new Order();
 
-        List<Product> product = new ArrayList<>();
-        request.getListProducts().forEach((produto)->{
-            product.add(produto);
+        List<Products> produtos = new ArrayList<>();
+        request.getProducts().forEach(produto -> {
+            produtos.add(produto);
         });
         
+        order.setProducts(produtos);
         order.setAmount(request.getAmount());
         order.setClientId(request.getClientId());
         order.setStatus(request.getStatus());
         order.setDateStart(request.getDateStart());
         order.setDateEnd(request.getDateEnd());
-        order.setListProducts(product);
+   
 
         order.persist();
         
-        return new ResponseDTO();
+        return Response.created(new URI(String.format("/order/%s", order.id.toString()))).build();
     }
     
     @PATCH
@@ -70,23 +77,29 @@ public class Resource {
     public ResponseDTO update(  UpdateDTO request ){
         log.info(request);
         
-        Order order = new Order();
+        Optional<Order> optionalOrder = Order.findByIdOptional(new ObjectId(request.getId()));
+        
+        optionalOrder.ifPresentOrElse(order -> {
+            List<Products> produtos = new ArrayList<>();
+            request.getProducts().forEach(produto -> {
+                produtos.add(produto);
+            });
+            
+            order.setProducts(produtos);
+            
+            order.setAmount(request.getAmount());
+            order.setClientId(request.getClientId());
+            order.setStatus(request.getStatus());
+            order.setDateStart(request.getDateStart());
+            order.setDateEnd(request.getDateEnd());
 
-        List<Product> product = new ArrayList<>();
-        request.getListProducts().forEach((produto)->{
-            product.add(produto);
+            order.update();
+            
+            
+        }, () -> {
+            throw new NotFoundException("Nao localizado");
         });
-        
-        order.setAmount(request.getAmount());
-        order.setClientId(request.getClientId());
-        order.setStatus(request.getStatus());
-        order.setDateStart(request.getDateStart());
-        order.setDateEnd(request.getDateEnd());
-        order.setListProducts(product);
 
-        order.id = new ObjectId(request.getId());
-        order.update();
-        
         return new ResponseDTO("Atualizado com sucesso!");
     }
     

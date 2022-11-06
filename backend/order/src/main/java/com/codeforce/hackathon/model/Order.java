@@ -20,5 +20,5 @@ public class Order extends PanacheMongoEntity {
     public String status;
     public LocalDate dateStart;
     public LocalDate dateEnd;
-    public List<Product> listProducts;
+    public List<Products> products;
 }
