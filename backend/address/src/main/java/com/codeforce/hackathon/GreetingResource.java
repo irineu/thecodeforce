@@ -52,6 +52,7 @@ public class GreetingResource {
         
         address.setStreet(request.getStreet());
         address.setCity(request.getCity());
+        address.setNumber(request.getNumber());
         address.setState(request.getState());
         address.setPostalCode(request.getPostalCode());
         address.setCountry(request.getCountry());

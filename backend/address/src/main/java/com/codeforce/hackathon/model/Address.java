@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 public class Address extends PanacheMongoEntity {
     public String street;
-    public Integer number;
+    public String number;
     public String city;
     public String state;
     public String postalCode;

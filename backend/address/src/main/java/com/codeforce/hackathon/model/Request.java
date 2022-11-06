@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class Request {
     private String street;
-    private Integer number;
+    private String number;
     private String city;
     private String state;
     private String postalCode;
