@@ -1,5 +1,6 @@
 const logger = require("../util/Logger");
 const _getnetServices = require("./GetnetServices");
+const _backendServices = require("./BackendService");
 const _tokenRepository = require("../repository/TokenizeRepository");
 
 class PaymentServices {
@@ -25,14 +26,20 @@ class PaymentServices {
     }
 
     // orderID -> busca a order com ammout
-    // clientId -> busca info e endereco local
+    const order = await _backendServices.getOrderData(request.orderId);
+    
+    // clientId -> busca info 
+    const client = await _backendServices.getClientInfo(request.clientId);
+    
+    // endereco local
+    const address = await _backendServices.getAddressInfo(client.data.addressId);
+    
     // busca cartao tokenizado pelo clientId
-    // seller_id:"ff8b853e-bbcd-468a-a67f-14128c193243"
-    // Muda status da order para pago
-    const tokenized = await _tokenRepository.getTokenByClientId(request.clientId)
-
+    // TODO: Remover id 1667756896123 e buscar dinamico 
+    const tokenized = await _tokenRepository.getTokenByClientId("1667756896123")  
+    
     const result = await _getnetServices.paymentCredit({
-      amount: "1000",
+      amount: order.data.amount,
       credit: {
         card: {
           brand: tokenized.brand,
@@ -48,40 +55,44 @@ class PaymentServices {
       },
       customer: {
         billing_address: {
-          city: "Porto Alegre",
-          number: "1000",
-          postal_code: "90230060",
-          state: "RS",
-          street: "Av. Brasil",
+          city: address.data.city,
+          number: address.data.number,
+          postal_code: address.data.postalCode,
+          state: address.data.state,
+          street: address.data.street,
         },
         customer_id: request.clientId,
-        document_number: "12345678912",
-        document_type: "CPF",
-        email: "aceitei@getnet.com.br",
-        first_name: "João",
-        last_name: "da Silva",
-        phone_number: "5551999887766",
+        document_number: client.data.documentNumber,
+        document_type: client.data.documentType,
+        email: client.data.email,
+        first_name: client.data.firstName,
+        last_name: client.data.lastName,
+        phone_number: client.data.phone,
       },
       device: {},
       order: {
-        order_id: request.orderId,
+        order_id: order.data.id,
       },
       seller_id: "ff8b853e-bbcd-468a-a67f-14128c193243",
       shippings: [
         {
           address: {
-            city: "Porto Alegre",
-            number: "1000",
-            postal_code: "90230060",
-            state: "RS",
-            street: "Av. Brasil",
+            city: address.data.city,
+            number: address.data.number,
+            postal_code: address.data.postalCode,
+            state: address.data.state,
+            street: address.data.street,
           },
         },
       ],
       sub_merchant: {},
     });
 
-    console.log(result.data);
+
+    // Muda status da order para pago
+    const updateStatus = await _backendServices.updateOrderStatus(order.data);
+
+    return { message: 'Pagamento realizado com sucesso!'}
   }
 }
 

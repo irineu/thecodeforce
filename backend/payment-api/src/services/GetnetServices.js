@@ -51,6 +51,7 @@ class GetnetServices {
     
     
     async paymentCredit( req ){
+        logger.info(`Calling GetNet API for payment Credit Card for orderId ${req.order.order_id}`)
         const {data} =  await this.getAuthorizationCode();
         /*
         {

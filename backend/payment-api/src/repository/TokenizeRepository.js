@@ -1,3 +1,4 @@
+const logger = require('../util/Logger');
 const Tokens = require('../models/TokenizedCards');
 
 module.exports = {
@@ -7,6 +8,7 @@ module.exports = {
     },
     
     async getTokenByClientId( clientId ) {
+        logger.info(`Getting TokenizedCard for ${clientId}`);
         return await Tokens.findOne({
             clientId,
         });
