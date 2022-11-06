@@ -30,63 +30,64 @@ import com.codeforce.hackathon.model.ResponseDTO;
 
 @Path("/order")
 public class Resource {
-    
+
     private static final Logger log = Logger.getLogger(Resource.class);
-    
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Order> list() {
         return Order.findAll().list();
     }
-    
+
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Order get( @PathParam("id") String id ) {
+    public Order get(@PathParam("id") String id) {
         return Order.findById(new ObjectId(id));
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(  Request request ) throws URISyntaxException{
+    public Response create(Request request) throws URISyntaxException {
         log.info(request);
-        
+
         Order order = new Order();
 
         List<Products> produtos = new ArrayList<>();
         request.getProducts().forEach(produto -> {
             produtos.add(produto);
         });
-        
+
         order.setProducts(produtos);
         order.setAmount(request.getAmount());
         order.setClientId(request.getClientId());
         order.setStatus(request.getStatus());
         order.setDateStart(request.getDateStart());
         order.setDateEnd(request.getDateEnd());
-   
 
         order.persist();
-        
-        return Response.created(new URI(String.format("/order/%s", order.id.toString()))).build();
+
+        return Response.created(
+                new URI(String.format("/order/%s", order.id.toString())))
+                .header("x-order-id", order.id.toString())
+                .build();
     }
-    
+
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseDTO update(  UpdateDTO request ){
+    public ResponseDTO update(UpdateDTO request) {
         log.info(request);
-        
+
         Optional<Order> optionalOrder = Order.findByIdOptional(new ObjectId(request.getId()));
-        
+
         optionalOrder.ifPresentOrElse(order -> {
             List<Products> produtos = new ArrayList<>();
             request.getProducts().forEach(produto -> {
                 produtos.add(produto);
             });
-            
+
             order.setProducts(produtos);
-            
+
             order.setAmount(request.getAmount());
             order.setClientId(request.getClientId());
             order.setStatus(request.getStatus());
@@ -94,23 +95,22 @@ public class Resource {
             order.setDateEnd(request.getDateEnd());
 
             order.update();
-            
-            
+
         }, () -> {
             throw new NotFoundException("Nao localizado");
         });
 
         return new ResponseDTO("Atualizado com sucesso!");
     }
-    
+
     @DELETE
     @Path("/{id}")
-    public ResponseDTO delete(  @PathParam("id") String id ){
+    public ResponseDTO delete(@PathParam("id") String id) {
         log.info(id);
-        
+
         Order.deleteById(new ObjectId(id));
-        
+
         return new ResponseDTO("Deletado com sucesso");
     }
-    
+
 }
