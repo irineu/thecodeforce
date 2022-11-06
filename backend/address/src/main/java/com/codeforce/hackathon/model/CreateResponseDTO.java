@@ -3,12 +3,12 @@ package com.codeforce.hackathon.model;
 import lombok.Data;
 
 @Data
-public class Response {
+public class CreateResponseDTO {
     private String message = "Criado com sucesso!";
     
-    public Response(){}
+    public CreateResponseDTO(){}
     
-    public Response(String message){
+    public CreateResponseDTO(String message){
         this.message = message;
     }
 }
