@@ -17,5 +17,4 @@ public class Storage extends PanacheMongoEntity {
     public String storeId;
     public BigDecimal price;
     public Integer units;
-    
 }
