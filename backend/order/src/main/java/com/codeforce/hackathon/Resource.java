@@ -70,6 +70,7 @@ public class Resource {
         return Response.created(
                 new URI(String.format("/order/%s", order.id.toString())))
                 .header("x-order-id", order.id.toString())
+                .entity(order)
                 .build();
     }
 
