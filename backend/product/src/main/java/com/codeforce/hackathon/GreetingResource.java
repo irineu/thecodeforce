@@ -51,7 +51,8 @@ public class GreetingResource {
         product.setBrand(request.getBrand());
         product.setType(request.getType());
         product.setUnits(request.getUnits());
-        product.setDurationUnits(request.getDurationUnits());
+        product.setAvgDuration(request.getAvgDuration());
+        product.setPrice(request.getPrice());
 
         product.persist();
         
@@ -69,7 +70,8 @@ public class GreetingResource {
         product.setBrand(request.getBrand());
         product.setType(request.getType());
         product.setUnits(request.getUnits());
-        product.setDurationUnits(request.getDurationUnits());
+        product.setAvgDuration(request.getAvgDuration());
+        product.setPrice(request.getPrice());
 
         product.id = new ObjectId(request.getId());
         product.update();

@@ -13,5 +13,6 @@ public class UpdateDTO {
     private String brand;
     private String type;
     private Integer units;
-    private String durationUnits;
+    private Integer avgDuration;
+    private BigDecimal price;
 }

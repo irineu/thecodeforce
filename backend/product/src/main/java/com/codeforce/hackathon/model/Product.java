@@ -20,5 +20,6 @@ public class Product extends PanacheMongoEntity {
     public String brand;
     public String type;
     public Integer units;
-    public String durationUnits;
+    public Integer avgDuration;
+    public BigDecimal price;
 }
