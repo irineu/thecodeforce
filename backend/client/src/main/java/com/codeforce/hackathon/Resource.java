@@ -58,7 +58,7 @@ public class Resource {
         
         Client client = new Client();
         
-        client.setFirstName(request.getLastName());
+        client.setFirstName(request.getFirstName());
         client.setLastName(request.getLastName());
         client.setDocumentNumber(request.getDocumentNumber());
         client.setDocumentType(request.getDocumentType());
@@ -82,7 +82,7 @@ public class Resource {
         
         Client client = new Client();
         
-        client.setFirstName(request.getLastName());
+        client.setFirstName(request.getFirstName());
         client.setLastName(request.getLastName());
         client.setEmail(request.getEmail());
         client.setPhone(request.getPhone());
