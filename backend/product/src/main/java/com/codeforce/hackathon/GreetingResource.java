@@ -17,7 +17,6 @@ import org.jboss.logging.Logger;
 
 import com.codeforce.hackathon.model.UpdateDTO;
 import com.codeforce.hackathon.model.Product;
-import com.mongodb.client.model.geojson.Position;
 import com.codeforce.hackathon.model.Request;
 import com.codeforce.hackathon.model.Response;
 
