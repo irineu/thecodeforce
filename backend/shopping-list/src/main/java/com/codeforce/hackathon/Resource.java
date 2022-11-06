@@ -3,10 +3,12 @@ package com.codeforce.hackathon;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -21,6 +23,7 @@ import org.jboss.logging.Logger;
 import com.codeforce.hackathon.model.UpdateDTO;
 import com.codeforce.hackathon.model.ShoppingList;
 import com.codeforce.hackathon.model.Product;
+import com.codeforce.hackathon.model.Products;
 import com.codeforce.hackathon.model.Request;
 import com.codeforce.hackathon.model.ResponseDTO;
 
@@ -39,8 +42,8 @@ public class Resource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ShoppingList get( @PathParam("id") String id ) {
-        return ShoppingList.findById(new ObjectId(id));
+    public ShoppingList get( @PathParam("id") String clientId ) {
+        return ShoppingList.findByClientId(clientId);
     }
     
     @POST
@@ -52,19 +55,19 @@ public class Resource {
         }
         
         ShoppingList shoppinglist = new ShoppingList();
-
-        List<Product> product = new ArrayList<>();
-        request.getListProducts().forEach((produto)->{
-            product.add(produto);
+        
+        List<Products> produtos = new ArrayList<>();
+        request.getProducts().forEach(produto -> {
+            produtos.add(produto);
         });
         
         shoppinglist.setClientId(request.getClientId());
         shoppinglist.setDateNext(request.getDateNext());
-        shoppinglist.setListProducts(product);
-
+        shoppinglist.setProducts(produtos);
+        
         shoppinglist.persist();
         
-        return Response.created(new URI(String.format("/list/%s",shoppinglist.id.toString()))).build();
+        return Response.created(new URI(String.format("/list/%s",shoppinglist.getClientId()))).build();
     }
     
     @PATCH
@@ -72,18 +75,20 @@ public class Resource {
     public ResponseDTO update(  UpdateDTO request ){
         log.info(request);
         
-        ShoppingList shoppinglist = new ShoppingList();
+        ShoppingList shoppingList = ShoppingList.findByClientId(request.getClientId());
+        
+        if ( shoppingList == null ) {
+            throw new NotFoundException("Usuário não encontrado");
+        }
 
-        List<Product> product = new ArrayList<>();
-        request.getListProducts().forEach((produto)->{
-            product.add(produto);
+        List<Products> produtos = new ArrayList<>();
+        request.getProducts().forEach(produto -> {
+            produtos.add(produto);
         });
         
-        shoppinglist.setDateNext(request.getDateNext());
-        shoppinglist.setListProducts(product);
-
-        shoppinglist.id = new ObjectId(request.getId());
-        shoppinglist.update();
+        shoppingList.setDateNext(request.getDateNext());
+        shoppingList.setProducts(produtos);
+        shoppingList.update();
         
         return new ResponseDTO("Atualizado com sucesso!");
     }

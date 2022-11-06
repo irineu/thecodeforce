@@ -16,7 +16,7 @@ import lombok.ToString;
 public class ShoppingList extends PanacheMongoEntity {
     public String clientId;
     public LocalDate dateNext;
-    public List<Product> listProducts;
+    public List<Products> products;
 
     public static ShoppingList findByClientId(String clientId){
         return find("clientId", clientId).firstResult();
