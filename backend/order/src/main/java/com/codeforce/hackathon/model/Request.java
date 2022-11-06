@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class Request {
     private BigDecimal amount;
-    private String idClient;
+    private String clientId;
     private String status;
     private LocalDate dateStart;
     private LocalDate dateEnd;

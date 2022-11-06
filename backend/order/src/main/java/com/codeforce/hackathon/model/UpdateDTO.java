@@ -12,7 +12,7 @@ import lombok.ToString;
 public class UpdateDTO {
     private String id;
     private BigDecimal amount;
-    private String idClient;
+    private String clientId;
     private String status;
     private LocalDate dateStart;
     private LocalDate dateEnd;

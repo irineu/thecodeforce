@@ -1,5 +1,6 @@
 package com.codeforce.hackathon;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.bson.types.ObjectId;
 import org.jboss.logging.Logger;
@@ -20,12 +22,12 @@ import com.codeforce.hackathon.model.UpdateDTO;
 import com.codeforce.hackathon.model.ShoppingList;
 import com.codeforce.hackathon.model.Product;
 import com.codeforce.hackathon.model.Request;
-import com.codeforce.hackathon.model.Response;
+import com.codeforce.hackathon.model.ResponseDTO;
 
 @Path("/list")
-public class GreetingResource {
+public class Resource {
     
-    private static final Logger log = Logger.getLogger(GreetingResource.class);
+    private static final Logger log = Logger.getLogger(Resource.class);
     
 
     @GET
@@ -62,12 +64,12 @@ public class GreetingResource {
 
         shoppinglist.persist();
         
-        return new Response("Criado com sucesso!");
+        return Response.created(new URI(String.format("/list/%s",shoppinglist.id.toString()))).build();
     }
     
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(  UpdateDTO request ){
+    public ResponseDTO update(  UpdateDTO request ){
         log.info(request);
         
         ShoppingList shoppinglist = new ShoppingList();
@@ -83,17 +85,17 @@ public class GreetingResource {
         shoppinglist.id = new ObjectId(request.getId());
         shoppinglist.update();
         
-        return new Response("Atualizado com sucesso!");
+        return new ResponseDTO("Atualizado com sucesso!");
     }
     
     @DELETE
     @Path("/{id}")
-    public Response delete(  @PathParam("id") String id ){
+    public ResponseDTO delete(  @PathParam("id") String id ){
         log.info(id);
         
         ShoppingList.deleteById(new ObjectId(id));
         
-        return new Response("Deletado com sucesso");
+        return new ResponseDTO("Deletado com sucesso");
     }
     
 }

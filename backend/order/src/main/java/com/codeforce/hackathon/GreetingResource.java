@@ -54,7 +54,7 @@ public class GreetingResource {
         });
         
         order.setAmount(request.getAmount());
-        order.setIdClient(request.getIdClient());
+        order.setClientId(request.getClientId());
         order.setStatus(request.getStatus());
         order.setDateStart(request.getDateStart());
         order.setDateEnd(request.getDateEnd());
@@ -78,7 +78,7 @@ public class GreetingResource {
         });
         
         order.setAmount(request.getAmount());
-        order.setIdClient(request.getIdClient());
+        order.setClientId(request.getClientId());
         order.setStatus(request.getStatus());
         order.setDateStart(request.getDateStart());
         order.setDateEnd(request.getDateEnd());
