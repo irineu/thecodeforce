@@ -121,8 +121,15 @@ export class CheckoutComponent implements OnInit {
         "status" : "Enviado para análise",
         "dateStart" : strD,
         "products" : this.activeUser.list.products
-      }).subscribe((r) => {
-        this.router.navigate(['checkout-complete', this.activeUser.documentNumber]);
+      }, ).subscribe((r: any) => {
+        console.log(r.id)
+
+        this.http.post("https://codeforce-pay-bff.herokuapp.com/card/pay",{
+          orderId: r.id,
+          clientId: this.activeUser.documentNumber,
+        }).subscribe((r: any) => {
+          this.router.navigate(['checkout-complete', this.activeUser.documentNumber]);
+        });
       });
 
     }
