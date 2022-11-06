@@ -20,12 +20,12 @@ import com.codeforce.hackathon.model.UpdateDTO;
 import com.mongodb.client.model.geojson.Point;
 import com.mongodb.client.model.geojson.Position;
 import com.codeforce.hackathon.model.Request;
-import com.codeforce.hackathon.model.CreateResponseDTO;
+import com.codeforce.hackathon.model.ResponseDTO;
 
 @Path("/address")
-public class GreetingResource {
+public class Resource {
     
-    private static final Logger log = Logger.getLogger(GreetingResource.class);
+    private static final Logger log = Logger.getLogger(Resource.class);
     
 
     @GET
@@ -43,7 +43,7 @@ public class GreetingResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public CreateResponseDTO create(  Request request ){
+    public ResponseDTO create(  Request request ){
         log.info(request);
         
         Address address = new Address();
@@ -61,12 +61,12 @@ public class GreetingResource {
         
         address.persist();
         
-        return new CreateResponseDTO();
+        return new ResponseDTO();
     }
     
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
-    public CreateResponseDTO update(  UpdateDTO request ){
+    public ResponseDTO update(  UpdateDTO request ){
         log.info(request);
         
         Address address = new Address();
@@ -84,17 +84,17 @@ public class GreetingResource {
         address.id = new ObjectId(request.getId());
         address.update();
         
-        return new CreateResponseDTO("Atualizado com sucesso!");
+        return new ResponseDTO("Atualizado com sucesso!");
     }
     
     @DELETE
     @Path("/{id}")
-    public CreateResponseDTO delete(  @PathParam("id") String id ){
+    public ResponseDTO delete(  @PathParam("id") String id ){
         log.info(id);
         
         Address.deleteById(new ObjectId(id));
         
-        return new CreateResponseDTO("Deletado com sucesso");
+        return new ResponseDTO("Deletado com sucesso");
     }
     
 }

@@ -7,16 +7,14 @@ import lombok.Data;
 @Data
 public class Product {
     private String id;
-    private String nameProduct;
+    private String name;
     private BigDecimal price;
-    private String units;
 
     public Product(){}
 
-    public Product(String id, String nameProduct, BigDecimal price, String units){
+    public Product(String id, String name, BigDecimal price){
         this.id = id;
-        this.nameProduct = nameProduct;
+        this.name = name;
         this.price = price;
-        this.units = units;
     }
 }

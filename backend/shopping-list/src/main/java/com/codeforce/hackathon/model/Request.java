@@ -11,5 +11,5 @@ import lombok.ToString;
 public class Request {
     private String clientId;
     private LocalDate dateNext;
-    private List<Product> listProducts;
+    private List<Products> products;
 }

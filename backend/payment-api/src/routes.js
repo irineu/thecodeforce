@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
-// Middlewares
+// TODO: Middlewares
+// TODO: Auth
 //const auth       = require('./middlewares/auth');
 
 // Controllers

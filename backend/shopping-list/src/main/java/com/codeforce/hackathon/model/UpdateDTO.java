@@ -9,7 +9,8 @@ import lombok.ToString;
 @Data
 @ToString
 public class UpdateDTO {
-    private String id;
+
+    private String clientId;
     private LocalDate dateNext;
-    private List<Product> listProducts;
+    private List<Products> products;
 }

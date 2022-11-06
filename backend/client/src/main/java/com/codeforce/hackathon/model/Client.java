@@ -1,7 +1,5 @@
 package com.codeforce.hackathon.model;
 
-import java.time.LocalDate;
-
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 import lombok.Getter;

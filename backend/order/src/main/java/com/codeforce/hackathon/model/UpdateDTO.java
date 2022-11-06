@@ -16,5 +16,5 @@ public class UpdateDTO {
     private String status;
     private LocalDate dateStart;
     private LocalDate dateEnd;
-    private List<Product> listProducts;
+    private List<Products> products;
 }
