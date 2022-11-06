@@ -8,9 +8,9 @@ import {CheckoutCompleteComponent} from "./checkout-complete/checkout-complete.c
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'checkout-complete', component: CheckoutCompleteComponent },
+  { path: 'home/:id', component: HomeComponent },
+  { path: 'checkout/:id', component: CheckoutComponent },
+  { path: 'checkout-complete/:id', component: CheckoutCompleteComponent },
   { path: '**', component: LoginComponent },
 ];
 

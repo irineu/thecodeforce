@@ -15,8 +15,22 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithSSO(platform:string){
-    this.mockService.mockUserFrom(platform);
-    this.router.navigate(['home']);
+    this.mockService.mockUserFrom(platform).subscribe((doc) => {
+      this.router.navigate(['home', doc]);
+    });
+  }
+
+  signup(){
+
+    let tempUser = localStorage.getItem("temp-user");
+    if(!tempUser){
+      this.mockService.mockSignup().subscribe((doc) => {
+        localStorage.setItem("temp-user", doc as string);
+        this.router.navigate(['home', doc]);
+      });
+    }else{
+      this.router.navigate(['home', tempUser]);
+    }
   }
 
 }

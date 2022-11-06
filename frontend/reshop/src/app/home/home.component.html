@@ -10,14 +10,14 @@
   </div>
 </section>
 
-<section>
+<section *ngIf="activeUser">
   <h4 style="margin-bottom: 4px">Olá {{activeUser.name}}</h4>
   <h1>Minha Lista de Compras</h1>
 
   <br/>
 
-  <div class="schedule"  *ngIf="activeUser.productList.length > 0">
-    <span>Próxima data de compra: </span><input type="date" placeholder="dd-mm-yyyy"  [(ngModel)]="nextPurchase">
+  <div class="schedule"  *ngIf="activeUser.list.products.length > 0">
+    <span>Próxima data de compra: </span><input type="date" placeholder="dd-mm-yyyy"  [(ngModel)]="activeUser.list.dateNext">
   </div>
 
   <br/>
@@ -47,14 +47,14 @@
     </div>
   </div>
 
-  <div *ngIf="activeUser.productList.length == 0" class="empty-basket">
+  <div *ngIf="activeUser.list.products.length == 0" class="empty-basket">
     <h2>Sua cesta está vazia!</h2>
     <br/>
     <i class="fa-solid fa-basket-shopping fa-4x"></i>
   </div>
 
-  <ul *ngIf="activeUser.productList.length > 0" class="product-list">
-    <li *ngFor="let p of activeUser.productList">
+  <ul *ngIf="activeUser.list.products.length > 0" class="product-list">
+    <li *ngFor="let p of activeUser.list.products">
       <div>
         <i class="fa-solid fa-box"></i>
         <div class="product-desc">
@@ -71,15 +71,15 @@
       </div>
     </li>
   </ul>
-  <hr *ngIf="activeUser.productList.length > 0"/>
-  <div class="footer"  *ngIf="activeUser.productList.length > 0">
+  <hr *ngIf="activeUser.list.products.length > 0"/>
+  <div class="footer"  *ngIf="activeUser.list.products.length > 0">
     <h3>*Total Aproximado:</h3>
     <div class="price">
       <h2>R${{getTotal() | number : '1.2-2'}}</h2>
     </div>
   </div>
 
-  <button class="buy-now" *ngIf="activeUser.productList.length > 0" (click)="buyNow()">Comprar Agora</button>
+  <button class="buy-now" *ngIf="activeUser.list.products.length > 0" (click)="buyNow()">Comprar Agora</button>
 
 
 </section>

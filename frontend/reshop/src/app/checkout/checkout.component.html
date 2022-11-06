@@ -10,7 +10,7 @@
   </div>
 </section>
 
-<section>
+<section *ngIf="activeUser">
   <h4 style="margin-bottom: 4px">Olá {{activeUser.name}}</h4>
   <h1>Chegou o grande dia!</h1>
 
@@ -47,8 +47,8 @@
   </div>
 
 
-  <ul *ngIf="activeUser.productList.length > 0" class="product-list">
-    <li *ngFor="let p of activeUser.productList">
+  <ul *ngIf="activeUser.list.products.length > 0" class="product-list">
+    <li *ngFor="let p of activeUser.list.products">
       <div>
         <i class="fa-solid fa-box"></i>
         <div class="product-desc">
@@ -87,9 +87,9 @@
 
   <div class="addr">
     <h3>Entregar em:</h3>
-    <p>{{activeUser.address.addrLine1}} {{activeUser.address.addrLine2}}</p>
+    <p>{{activeUser.address.street}}</p>
     <p>{{activeUser.address.city}} {{activeUser.address.state}}</p>
-    <p>{{activeUser.address.zip}}</p>
+    <p>{{activeUser.address.postalCode}}</p>
     <a class="change-pay" href="#">Alterar endereço</a>
   </div>
 

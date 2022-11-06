@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MockService} from "../mock.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkout-complete',
@@ -9,18 +9,22 @@ import {Router} from "@angular/router";
 })
 export class CheckoutCompleteComponent implements OnInit {
 
-  constructor(private mockService:MockService, private router:Router) { }
+  constructor(private mockService:MockService, private router:Router, private route:ActivatedRoute) { }
 
   activeUser: any;
   nextDate?: Date;
 
   ngOnInit(): void {
-    this.activeUser = this.mockService.getActiveUser();
+    this.mockService.getActiveUser(this.route.snapshot.params['id']).subscribe((user) => {
+      this.activeUser = user;
 
-    let d = new Date();
-    d = this.addDays(d, this.activeUser.periodicity );
+      let d = new Date();
+      d = this.addDays(d, this.activeUser.periodicity );
 
-    this.nextDate = d;
+      this.nextDate = d;
+    });
+
+
   }
 
   addDays(date: Date, days:number) {
