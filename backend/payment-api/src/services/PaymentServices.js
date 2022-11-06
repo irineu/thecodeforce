@@ -39,8 +39,7 @@ class PaymentServices {
           cardholder_name: tokenized.cardholder_name,
           expiration_month: tokenized.expiration_month,
           expiration_year: tokenized.expiration_year,
-          number_token:
-          tokenized.token,
+          number_token: tokenized.token,
         },
         delayed: false,
         number_installments: 1,
