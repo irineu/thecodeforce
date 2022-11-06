@@ -109,7 +109,22 @@ export class CheckoutComponent implements OnInit {
 
   payNow() {
     if(confirm("Confirma a operação?")){
-      this.router.navigate(['checkout-complete', this.activeUser.documentNumber])
+
+      let d = new Date();
+      let strD = [d.getFullYear(), (d.getMonth()+1).toString().padStart(2, "0"), d.getDate().toString().padStart(2, "0")].join("-");
+
+
+
+      this.http.post("https://codeforce-order.herokuapp.com/order",{
+        "amount" : this.getDescTotal(),
+        "idClient" : this.activeUser.documentNumber,
+        "status" : "Enviado para análise",
+        "dateStart" : strD,
+        "products" : this.activeUser.list.products
+      }).subscribe((r) => {
+        this.router.navigate(['checkout-complete', this.activeUser.documentNumber]);
+      });
+
     }
   }
 }

@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home', doc]);
       });
     }else{
-      this.router.navigate(['home', tempUser]);
+      this.mockService.fetchUser(tempUser).subscribe((user:any) => {
+        this.router.navigate(['home', tempUser]);
+      });
     }
   }
 

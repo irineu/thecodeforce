@@ -48,7 +48,6 @@ export class MockService {
         observable.next(this.activeUser.documentNumber);
       });
     })
-
   }
 
   getActiveUser(document:any) {
