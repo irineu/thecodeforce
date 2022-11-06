@@ -9,6 +9,7 @@ const PaymentController = require('./controllers/PaymentController');
 const routes = Router();
 
 routes.post('/card/tokenize',  PaymentController.tokenizeCard)
+    .post('/card/pay', PaymentController.pay);
 
     
 module.exports = routes; 
