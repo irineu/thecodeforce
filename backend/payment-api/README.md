@@ -20,7 +20,11 @@ Repositório referente á desenvolvimento de um projeto de uma API de pagamento 
 - Para deploy em cloud é necessário garantir o build da aplicação em docker, após isso envie para heroku
 
 ```sh
-    npm 
+    heroku container:push web -a <SUA APP DO HEROKU>
+```
+
+```sh
+    heroku container:release web -a <SUA APP DO HEROKU>
 ```
 
 
