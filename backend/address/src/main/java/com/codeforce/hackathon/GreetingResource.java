@@ -20,7 +20,7 @@ import com.codeforce.hackathon.model.UpdateDTO;
 import com.mongodb.client.model.geojson.Point;
 import com.mongodb.client.model.geojson.Position;
 import com.codeforce.hackathon.model.Request;
-import com.codeforce.hackathon.model.Response;
+import com.codeforce.hackathon.model.CreateResponseDTO;
 
 @Path("/address")
 public class GreetingResource {
@@ -43,7 +43,7 @@ public class GreetingResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(  Request request ){
+    public CreateResponseDTO create(  Request request ){
         log.info(request);
         
         Address address = new Address();
@@ -61,12 +61,12 @@ public class GreetingResource {
         
         address.persist();
         
-        return new Response();
+        return new CreateResponseDTO();
     }
     
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(  UpdateDTO request ){
+    public CreateResponseDTO update(  UpdateDTO request ){
         log.info(request);
         
         Address address = new Address();
@@ -83,17 +83,17 @@ public class GreetingResource {
         address.id = new ObjectId(request.getId());
         address.update();
         
-        return new Response("Atualizado com sucesso!");
+        return new CreateResponseDTO("Atualizado com sucesso!");
     }
     
     @DELETE
     @Path("/{id}")
-    public Response delete(  @PathParam("id") String id ){
+    public CreateResponseDTO delete(  @PathParam("id") String id ){
         log.info(id);
         
         Address.deleteById(new ObjectId(id));
         
-        return new Response("Deletado com sucesso");
+        return new CreateResponseDTO("Deletado com sucesso");
     }
     
 }
