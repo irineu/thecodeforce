@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 public class Order extends PanacheMongoEntity {
     public BigDecimal amount;
-    public String idClient;
+    public String clientId;
     public String status;
     public LocalDate dateStart;
     public LocalDate dateEnd;
