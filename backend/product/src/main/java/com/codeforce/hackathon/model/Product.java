@@ -11,16 +11,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@MongoEntity(collection="address")
+@MongoEntity(collection="product")
 @Getter
 @Setter
 @ToString
-public class Address extends PanacheMongoEntity {
-    public String street;
-    public Integer number;
-    public String city;
-    public String state;
-    public String postalCode;
-    public String country;
-    public Point geoLocale;
+public class Product extends PanacheMongoEntity {
+    public String name;
+    public String brand;
+    public String type;
+    public Integer units;
+    public String durationUnits;
 }
