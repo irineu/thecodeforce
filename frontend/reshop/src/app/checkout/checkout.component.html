@@ -1,1 +1,99 @@
-<p>checkout works!</p>
+<section class="header">
+  <div class="logo">
+    <img src="assets/images/logo2.svg">
+  </div>
+  <div>
+
+  </div>
+  <div class="user">
+    <i class="fa-solid fa-circle-user fa-2x"></i>
+  </div>
+</section>
+
+<section>
+  <h4 style="margin-bottom: 4px">Olá {{activeUser.name}}</h4>
+  <h1>Chegou o grande dia!</h1>
+
+  <p>Buscamos em todos os fornecedores próximos os melhores preços para a sua lista de compras:</p>
+
+  <div class="partner">
+    <p>Clientes Santander</p>
+    <p>Tem isenção na taxa admin. ♨️️</p>
+  </div>
+
+  <div class="autocomplete-container">
+    <input class="add" type="text" placeholder="Adicionar produto extra" [(ngModel)]="productToSearch" (input)="onSearchChange()"/>
+    <div class="autocomplete" [ngStyle]="{'display': productToSearch.length > 2 ? 'block' : 'none'}">
+      <ul *ngIf="searchList.length > 0">
+        <li *ngFor="let product of searchList">
+          <div (click)="addProduct(product)">
+            <i class="fa-solid fa-box"></i>
+            <div class="product-desc">
+              <p>{{product.name}}</p>
+              <span>{{product.type}}</span>&nbsp;<span>{{product.brand}}</span><br/>
+            </div>
+            <div class="product-price">
+              <span>Preço médio:</span>
+              <span class="price">R${{product.price | number : '1.2-2'}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="empty" *ngIf="searchList.length == 0">
+        Pruduto não encontrado em nossos parceiros
+      </div>
+    </div>
+  </div>
+
+
+  <ul *ngIf="activeUser.productList.length > 0" class="product-list">
+    <li *ngFor="let p of activeUser.productList">
+      <div>
+        <i class="fa-solid fa-box"></i>
+        <div class="product-desc">
+          <p>{{p.product.name}}</p>
+          <span>Duração Estm.</span>&nbsp;<span>{{p.product.avgDuration * p.amount}}d</span>
+        </div>
+        <div class="product-amount">
+          <i class="fa-solid fa-circle-minus" (click)="decreaseAmount(p)"></i>
+          <span class="amount">
+            {{p.amount}}
+          </span>
+          <i class="fa-solid fa-circle-plus" (click)="increaseAmount(p)"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <hr/>
+
+  <div class="footer-min" >
+    <h3>Preço médio:</h3>
+    <div class="price">
+      <h2>R${{getTotal() | number : '1.2-2'}}</h2>
+    </div>
+  </div>
+  <div class="footer" >
+    <h3>Melhor Oferta:</h3>
+    <div class="price">
+      <h2>R${{getDescTotal() | number : '1.2-2'}}</h2>
+    </div>
+  </div>
+  <div class="partner">
+    <p>Vendido por: Pão de Açúcar</p>
+    <p>Entregue por: Rappi</p>
+  </div>
+
+  <div class="addr">
+    <h3>Entregar em:</h3>
+    <p>{{activeUser.address.addrLine1}} {{activeUser.address.addrLine2}}</p>
+    <p>{{activeUser.address.city}} {{activeUser.address.state}}</p>
+    <p>{{activeUser.address.zip}}</p>
+    <a class="change-pay" href="#">Alterar endereço</a>
+  </div>
+
+  <button class="buy-now"  (click)="payNow()">Efetuar pagamento</button>
+  <a class="change-pay" href="#">Alterar forma de pagamento</a>
+  <p style="text-align: center">Powered by <img style="height: 30px" src="assets/images/getnet.png"/></p>
+</section>

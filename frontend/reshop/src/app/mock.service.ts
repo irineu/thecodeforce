@@ -1,75 +1,19 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MockService {
 
-  constructor() { }
+  constructor(private http:HttpClient) {
+    http.get("https://codeforce-product.herokuapp.com/product").subscribe((data:any) => {
+      console.log(data);
+      this.products = data;
+    });
+  }
 
-  products = [
-    //Papel Toalha
-    {
-      name: 'Papel Toalha',
-      brand: 'Kitchen',
-      type: 'Papel Toalha',
-      units: 2,
-      avgDuration: 5,
-      price: 7.90
-    },
-    {
-      name: 'Papel Toalha',
-      brand: 'Qualitá',
-      type: 'Papel Toalha',
-      units: 3,
-      avgDuration: 5,
-      price: 10.20
-    },
-
-    //Café
-    {
-      name: 'Café Tradicional',
-      brand: 'Três Corações',
-      type: 'Café',
-      units: 1,
-      avgDuration: 15,
-      price: 11.50
-    },
-    {
-      name: 'Café Extra Forte',
-      brand: 'Três Corações',
-      type: 'Café',
-      units: 1,
-      avgDuration: 15,
-      price: 12.40
-    },
-    {
-      name: 'Café Tradicional',
-      brand: 'Três Pelé',
-      type: 'Café',
-      units: 1,
-      avgDuration: 15,
-      price: 10.76
-    },
-
-    //Desinfetante
-    {
-      name: 'Desinfetante Lavanda 1l',
-      brand: 'Pinho',
-      type: 'Desinfetante',
-      units: 1,
-      avgDuration: 5,
-      price: 14.50
-    },
-    {
-      name: 'Desinfetante Lavanda 2l',
-      brand: 'Pinho',
-      type: 'Desinfetante',
-      units: 1,
-      avgDuration: 10,
-      price: 19.80
-    }
-  ]
+  products = []
 
   platformMock = {
     "linkedin" : {
@@ -82,7 +26,8 @@ export class MockService {
         zip: "12345-000"
       },
       productList: [],
-      periodicity: '30d'
+      lastPurchase: null,
+      periodicity: null
     }
   }
 
@@ -103,7 +48,14 @@ export class MockService {
 
   search(productToSearch: string) {
     return this.products.filter(p => {
+      // @ts-ignore
       return p.name.toLowerCase().indexOf(productToSearch.toLowerCase()) > -1 || p.type.toLowerCase().indexOf(productToSearch.toLowerCase()) > -1
     });
+  }
+
+  save(productList: any[], avg: number) {
+    this.activeUser.productList = productList;
+    this.activeUser.lastPurchase = new Date();
+    this.activeUser.periodicity = avg;
   }
 }

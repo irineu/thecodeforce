@@ -1,1 +1,31 @@
-<p>checkout-complete works!</p>
+<section class="header">
+  <div class="logo">
+    <img src="assets/images/logo2.svg">
+  </div>
+  <div>
+
+  </div>
+  <div class="user">
+    <i class="fa-solid fa-circle-user fa-2x"></i>
+  </div>
+</section>
+
+<section>
+  <h4 style="margin-bottom: 4px">Olá {{activeUser.name}}</h4>
+  <h1>Tudo pronto!</h1>
+
+  <div class="bye">
+
+    <div>
+      <p>A loja está preparando para entregar o seu pedido!</p>
+      <p>Sua próxima compra será: <b>{{nextDate | date: 'dd/MM/yyyy'}}</b></p>
+      <p>Até lá você pode alterar os produtos, a quantidade, adiar ou postergar a próxima entrega.</p>
+    </div>
+  </div>
+
+  <div style="text-align: center">
+    <img style="width: 40vw" src="assets/images/bixinho.svg">
+  </div>
+  <button class="buy-now" routerLink="/home">Voltar para Home</button>
+
+</section>
