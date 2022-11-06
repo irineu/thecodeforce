@@ -2,9 +2,6 @@ package com.codeforce.hackathon.model;
 
 import java.math.BigDecimal;
 
-import com.mongodb.client.model.geojson.Point;
-import com.mongodb.client.model.geojson.Position;
-
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 import lombok.Getter;
@@ -20,5 +17,6 @@ public class Product extends PanacheMongoEntity {
     public String brand;
     public String type;
     public Integer units;
-    public String durationUnits;
+    public Integer avgDuration;
+    public BigDecimal price;
 }

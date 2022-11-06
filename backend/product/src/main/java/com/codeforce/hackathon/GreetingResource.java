@@ -17,7 +17,6 @@ import org.jboss.logging.Logger;
 
 import com.codeforce.hackathon.model.UpdateDTO;
 import com.codeforce.hackathon.model.Product;
-import com.mongodb.client.model.geojson.Position;
 import com.codeforce.hackathon.model.Request;
 import com.codeforce.hackathon.model.Response;
 
@@ -51,7 +50,8 @@ public class GreetingResource {
         product.setBrand(request.getBrand());
         product.setType(request.getType());
         product.setUnits(request.getUnits());
-        product.setDurationUnits(request.getDurationUnits());
+        product.setAvgDuration(request.getAvgDuration());
+        product.setPrice(request.getPrice());
 
         product.persist();
         
@@ -69,7 +69,8 @@ public class GreetingResource {
         product.setBrand(request.getBrand());
         product.setType(request.getType());
         product.setUnits(request.getUnits());
-        product.setDurationUnits(request.getDurationUnits());
+        product.setAvgDuration(request.getAvgDuration());
+        product.setPrice(request.getPrice());
 
         product.id = new ObjectId(request.getId());
         product.update();
